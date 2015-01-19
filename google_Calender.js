@@ -36,8 +36,9 @@ var title = "",
     colorChosen = 0,
     valueData = "",
     outcome = [],
-    options = [];
-
+    options = [],
+    addShortcutAmout=1,
+    clickColor;
 
 
 //---------------------------------------------------------------------------------------------------------------------function used to paste event data
@@ -230,7 +231,7 @@ $(document).mouseup(function() {
 
 var checkValues = function(pushed) {
 
-    for (i = 0; i < 9; i++) {
+    for (i = 0; i < addShortcutAmout; i++) {
 
         if ($($(".keybind")[i]).val() == pushed) {
             addTo = $($(".addsTo")[i]).val();
@@ -305,7 +306,7 @@ options = (outcome.toString().replace(/,/g, ""));
 //--------------------------------------------------------------------------------------------------------------------- Adds shortcuts Menu item and shortucts panel
 
 $("#nav").append("<h2 style ='padding-left: 15px;' class='calHeader goog-zippy-header shortcuts'><span>Shortcuts</span><span id='shotcutsMenu'  class='clstMenu' ></span></h2>");
-$('body').append("<div id = 'shortcuts-menu' class='goog-menu goog-menu-vertical hidden' style='padding-left: 10px; position: fixed;top: 458px;left: 188px;width: 400px;height: 200px'></div>");
+$('body').append("<div id = 'shortcuts-menu' class='goog-menu goog-menu-vertical hidden' style='padding-left: 10px; position: fixed;top: 458px;left: 188px;width: 400px;height: 70px'></div>");
 
 
 
@@ -329,18 +330,18 @@ $(".goog-menuitem").hover(function() {
 
 
 
-//---------------------------------------------------------------------------------------------------------------------Adds 10 keybinding options
-
-for (i = 0; i < 9; i++) {
-    $("#shortcuts-menu").append("<div>Shift+Alt+<select class='keybind'>" + outcome + "</select> at <select class='addsTo'><option></option><option>Title</option><option>Location</option><option>Discription</option></select><input value='' style = 'width: 170px;'class='textbox-fill-input to-disable label-input-label valueData'></input><div class = 'clickColor eb-rb-color goog-inline-block' style='background-color: #a4bdfc; border-color:#a4bdfc; margin-left: 4px;'></div></div>");
+//---------------------------------------------------------------------------------------------------------------------Adds +1 keybinding option
+var addShotcuts = function(){
+for (i = 0; i < 1; i++) {
+    $("#shortcuts-menu").prepend("<div>Shift+Alt+<select class='keybind'>" + outcome + "</select> at <select class='addsTo'><option></option><option>Title</option><option>Location</option><option>Discription</option></select><input value='' style = 'width: 170px;'class='textbox-fill-input to-disable label-input-label valueData'></input><div class = 'clickColor eb-rb-color goog-inline-block' style='background-color: #a4bdfc; border-color:#a4bdfc; margin-left: 4px;'></div></div>");
 }
+
+}
+
+addShotcuts();
 $(".hidden").css({
     "display": "none"
 });
-
-
-
-
 //---------------------------------------------------------------------------------------------------------------------css stuff for shortcuts menu
 
 $(".shortcuts").on("click", function() {
@@ -492,16 +493,14 @@ $(".shortcutColor").addClass("hidden");
 $(".hidden").css({
     "display": "none"
 })
-
+var clickColorBox = function(){
 $(".clickColor").on("click", function() {
 
-    var clickColor = $(this)
-    $(".shortcutColor").css({
-        "display": "block",
-        "top": clickColor.position().top + 260,
-        "left": clickColor.position().left + 210,
-    });
+    clickColor = $(this)
+    $(".shortcutColor").css({"display": "block","top": clickColor.position().top + 260,"left": clickColor.position().left + 210, });
+})}
 
+clickColorBox();
     $(".ecp-rb-color").on("click", function() {
 
         clickColor.css({
@@ -547,12 +546,29 @@ $(".clickColor").on("click", function() {
         $(".shortcutColor").css({
             "display": "none"
         })
-    })
+    
 
 })
 
 
-//---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------Css stuff adds button to add shortcut keys
+
+$('#shortcuts-menu').append('<div id ="addShortcut" style="position: relative; top:17px" class="goog-inline-block goog-imageless-button goog-imageless-button-collapse-right">Add shortcut</div>')
+
+
+//---------------------------------------------------------------------------------------------------------------------When addshortucts button is clicked, add a shortcut and add css to lower box
+
+
+$('#addShortcut').on("click",function(){
+addShotcuts();
+clickColorBox();
+addShortcutAmout++;
+$('#shortcuts-menu').css({
+"height":($('#shortcuts-menu').css("height").substring(0, $('#shortcuts-menu').css("height").length - 2)-""+22).toString().concat("px")
+})
+
+})
+
 
 
 
