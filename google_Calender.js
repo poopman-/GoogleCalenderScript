@@ -332,7 +332,7 @@ $(".goog-menuitem").hover(function() {
 //---------------------------------------------------------------------------------------------------------------------Adds 10 keybinding options
 
 for (i = 0; i < 9; i++) {
-    $("#shortcuts-menu").append("<div>Shift+Alt+<select class='keybind'>" + outcome + "</select> at <select class='addsTo'><option></option><option>Title</option><option>Location</option><option>Discription</option></select><input value='' style = 'width: 170px;'class='textbox-fill-input to-disable label-input-label valueData'></input><div class = 'clickColor eb-rb-color goog-inline-block' style='background-color: #a4bdfc; border-color:#a4bdfc'></div></div>");
+    $("#shortcuts-menu").append("<div>Shift+Alt+<select class='keybind'>" + outcome + "</select> at <select class='addsTo'><option></option><option>Title</option><option>Location</option><option>Discription</option></select><input value='' style = 'width: 170px;'class='textbox-fill-input to-disable label-input-label valueData'></input><div class = 'clickColor eb-rb-color goog-inline-block' style='background-color: #a4bdfc; border-color:#a4bdfc; margin-left: 4px;'></div></div>");
 }
 $(".hidden").css({
     "display": "none"
@@ -558,13 +558,9 @@ $(".clickColor").on("click", function() {
 
 }();
 }
-} 
-
-
-
-//---------------------------------------------------------------------------------------------------------------------if jquery isn't loaded, load it. and alert();
-
-else {script = document.createElement("script");script.src = "https://code.jquery.com/jquery-1.10.2.min.js";document.head.appendChild(script);
-    alert("jQuery should now be loaded please run this script again to apply the new functions.")}
+} else {
+script = document.createElement("script");script.src = "https://code.jquery.com/jquery-1.10.2.min.js";document.head.appendChild(script);
+    alert("jQuery should now be loaded please run this script again to apply the new functions.")
+}
 
 
